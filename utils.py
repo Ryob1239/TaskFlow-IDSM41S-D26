@@ -11,7 +11,8 @@ def show_menu():
     print("  [5] ✏️  Editar una tarea")
     print("  [6] Mostrar tareas pendientes")
     print("  [7] Mostrar tareas completadas")
-    print("  [8] 🚪 Salir del sistema")
+    print("  [8] 🔎 Buscar tareas por nombre")
+    print("  [9] 🚪 Salir del sistema")
     print()
     print("*" * 40)
 

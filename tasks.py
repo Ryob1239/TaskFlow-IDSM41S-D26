@@ -226,4 +226,26 @@ def filter_tasks_by_status(tasks, completed):
         return
 
     list_tasks(tareas_filtradas)
-main
+
+def search_tasks(tasks, text):
+    """Busca tareas por nombre sin distinguir mayúsculas y minúsculas."""
+    text = text.strip()
+
+    if not text:
+        print("Escribe un texto para buscar.")
+        return
+
+    matches = [
+        task for task in tasks
+        if text.casefold() in task[KEY_TITLE].casefold()
+    ]
+
+    if not matches:
+        print("No se encontraron tareas con ese nombre.")
+        return
+
+    print("\nResultados de la búsqueda:")
+    for task in matches:
+        status = "Completada" if is_completed(task) else "Pendiente"
+        print(f"{task[KEY_ID]}. {task[KEY_TITLE]} [{status}]")
+
