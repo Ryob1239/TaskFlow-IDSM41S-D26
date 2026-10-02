@@ -1,3 +1,5 @@
+from ast import main
+
 from models import (
     KEY_ID,
     KEY_TITLE,
@@ -226,4 +228,5 @@ def filter_tasks_by_status(tasks, completed):
         return
 
     list_tasks(tareas_filtradas)
-main
+    
+    main
