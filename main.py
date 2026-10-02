@@ -4,12 +4,12 @@ from tasks import (
     complete_task,
     delete_task,
     edit_task,
+    search_tasks,
     filter_tasks_by_status
 )
 
 from storage import load_tasks, save_tasks
 from utils import show_menu, show_message, pause
-
 
 tasks = []
 
@@ -28,24 +28,20 @@ def main():
     while True:
         show_menu()
 
-        option = input("Selecciona una opción [1-8]: ").strip()
+        option = input("Selecciona una opción [1-9]: ").strip()
 
         # Validar que la opción sea un número
         if not option.isdigit():
             show_message(
-                "Debes ingresar un número del 1 al 8.",
+                "Debes ingresar un número del 1 al 9.",
                 "error"
             )
             pause()
             continue
 
-        # Validar rango de opciones
-        if option not in ["1", "2", "3", "4", "5", "6", "7", "8"]:
-            show_message(
-                "La opción seleccionada no existe. Elige del 1 al 8.",
-                "error"
-            )
-            pause()
+        #  Validar rango de opciones
+        if option not in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+            print("Error: Opción fuera de rango.")
             continue
 
         # Agregar tarea
@@ -94,30 +90,19 @@ def main():
 
             pause()
 
-        # Editar tarea
-        elif option == "5":
-            print("\n--- EDITAR TAREA ---")
-
-            task_id = input(
-                "ID de la tarea a editar: "
-            ).strip()
-
-            new_title = input(
-                "Nuevo nombre de la tarea: "
-            ).strip()
-
-            if edit_task(tasks, task_id, new_title):
-                save_tasks(tasks)
-
-            pause()
-
-        # Filtrar tareas por estado
+        # Filtrar tareas pendientes o completadas
         elif option in ("6", "7"):
             filter_tasks_by_status(tasks, option == "7")
             pause()
 
-        # Salir
+        # Buscar tareas por nombre
         elif option == "8":
+            print("\n--- BUSCAR TAREAS ---")
+            text = input("Escribe el nombre o parte del nombre de la tarea: ")
+            search_tasks(tasks, text)
+            pause()
+
+        elif option == "9":
             save_tasks(tasks)
             show_message(
                 "Cambios guardados. Gracias por utilizar TaskFlow.",
